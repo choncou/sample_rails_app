@@ -1,0 +1,31 @@
+{
+  "name": "Appsignal Blog Post: Setting up a Rails app for monitoring",
+  "description": "An example application for setting up monitoring in a Rails application",
+  "env": {
+    "RAILS_MASTER_KEY": {
+      "description": "secret key for rails credentials",
+      "requried": true
+    },
+    "DATABASE_URL": {
+      "description": "url to the database",
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
