@@ -1,6 +1,11 @@
 {
   "name": "blog-appsignal-setup",
   "private": true,
+  "scripts": {
+    "start:rails": "bundle exec rails s",
+    "start:sidekiq": "bundle exec sidekiq",
+    "start": "yarn start:rails & yarn start:sidekiq"
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
