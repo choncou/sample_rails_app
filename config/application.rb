@@ -19,7 +19,7 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module BlogAppsignalSetup
+module HerokuReadyRails
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
@@ -31,5 +31,13 @@ module BlogAppsignalSetup
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Sidekiq for job queueing
+    config.active_job.queue_adapter = :sidekiq
+
+    config.generators do |g|
+      g.assets false
+      g.system_tests false
+    end
   end
 end
