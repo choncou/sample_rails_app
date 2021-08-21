@@ -1,6 +1,6 @@
 {
-  "name": "Appsignal Blog Post: Setting up a Rails app for monitoring",
-  "description": "An example application for setting up monitoring in a Rails application",
+  "name": "Heroku Ready Ruby on Rails example",
+  "description": "Heroku Ready Ruby on Rails example",
   "repository": "https://github.com/choncou/heroku_ready_rails",
   "keywords": ["ruby", "rails", "example"],
   "env": {
