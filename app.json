@@ -9,6 +9,10 @@
     "DATABASE_URL": {
       "description": "url to the database",
       "required": true
+    },
+    "REDIS_URL": {
+      "description": "url to the redis instance",
+      "required": true
     }
   },
   "formation": {
