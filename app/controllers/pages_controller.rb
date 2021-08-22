@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-    RandomLongRunningJob.perform_later
+    CreateRandomPostsJob.perform_later
   end
 end
