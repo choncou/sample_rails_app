@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'active_support'
+require 'optparse'
+require 'optparse/uri'
+
+Options = Struct.new(:domain, :sleep, keyword_init: true)
+
+class Parser
+  def self.parse(options)
+    args = Options.new(sleep: 5)
+
+    opt_parser = OptionParser.new do |opts|
+      opts.banner = "Usage: ./bin/traffic -d https://heroku-ready-rails-1.herokuapp.com"
+
+      opts.on("-dDOMAIN", "--domain DOMAIN", URI, "base domain of your app") do |domain|
+        args.domain = domain.to_s
+      end
+
+      opts.on("-s", "--sleep sleep", Integer, "seconds between making requests: default 5") do |seconds|
+        args.sleep = seconds
+      end
+
+      opts.on("-h", "--help", "Prints this help") do
+        puts opts
+        exit
+      end
+    end
+
+    opt_parser.parse!(options)
+    return args
+  end
+end
+
+options = Parser.parse [*ARGV].presence || ['--help']
+p options
+
+commands = [
+  "curl -I #{options.domain} | head -n 1",
+  "sleep #{options.sleep}",
+]
+output = exec "while :; do #{commands.join(';')}; done"
