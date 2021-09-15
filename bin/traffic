@@ -37,7 +37,8 @@ options = Parser.parse [*ARGV].presence || ['--help']
 p options
 
 commands = [
-  "curl -I #{options.domain} | head -n 1",
+  "curl -s -o /dev/null -I -w \"%{http_code}\n\" #{options.domain}",
+  "curl -s -o /dev/null -I -w \"%{http_code}\n\" #{options.domain}/posts",
   "sleep #{options.sleep}",
 ]
 output = exec "while :; do #{commands.join(';')}; done"
