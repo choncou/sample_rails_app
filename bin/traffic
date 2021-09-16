@@ -38,7 +38,7 @@ p options
 
 commands = [
   "curl -s -o /dev/null -I -w \"%{http_code}\n\" #{options.domain}",
-  "curl -s -o /dev/null -I -w \"%{http_code}\n\" #{options.domain}/posts",
+  "curl -s -o /dev/null -I -w \"%{http_code}\n\" #{options.domain}/posts?starts_with=E",
   "sleep #{options.sleep}",
 ]
 output = exec "while :; do #{commands.join(';')}; done"
