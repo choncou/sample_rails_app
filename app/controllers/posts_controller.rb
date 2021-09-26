@@ -62,10 +62,15 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    Appsignal.set_error(e) do |transaction|
+      transaction.set_tags(user_id: 'user-from-params', post_id: params[:id])
     end
+    render json: { error: "Oops. That post isn't here" } , status: :not_found
+  end
 
     # Only allow a list of trusted parameters through.
     def post_params
