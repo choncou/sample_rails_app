@@ -9,6 +9,7 @@ class PostsController < ApplicationController
              else
                Post.all
              end
+    Appsignal.set_gauge("posts_index", @posts.size, starts_with: params[:starts_with])
   end
 
   # GET /posts/1 or /posts/1.json
