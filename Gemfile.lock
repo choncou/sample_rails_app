@@ -60,6 +60,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    appsignal (3.0.13)
+      rack
     bindex (0.8.1)
     bootsnap (1.7.7)
       msgpack (~> 1.0)
@@ -178,6 +180,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  appsignal
   bootsnap (>= 1.4.4)
   byebug
   faker
