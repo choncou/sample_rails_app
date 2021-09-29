@@ -1,0 +1,18 @@
+FROM --platform=linux/amd64 ruby:3.0.1-alpine
+
+ARG BUILD_PACKAGES="build-base curl-dev git python2 alpine-sdk coreutils"
+ARG DEV_PACKAGES="postgresql-dev postgresql-client nodejs yarn"
+ARG RUBY_PACKAGES="tzdata"
+
+# install packages
+RUN apk update \
+    && apk upgrade \
+    && apk add --update --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
+
+ENV APPSIGNAL_BUILD_FOR_MUSL=1
+WORKDIR /usr/app_root
+COPY Gemfile* ./
+RUN bundle install
+COPY package.json yarn.lock ./
+RUN yarn install
+COPY . .

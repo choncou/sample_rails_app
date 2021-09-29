@@ -9,12 +9,12 @@ Options = Struct.new(:domain, :sleep, keyword_init: true)
 
 class Parser
   def self.parse(options)
-    args = Options.new(sleep: 5)
+    args = Options.new(sleep: 5, domain: "http://localhost:3000")
 
     opt_parser = OptionParser.new do |opts|
-      opts.banner = "Usage: ./bin/traffic -d https://heroku-ready-rails-1.herokuapp.com"
+      opts.banner = "Usage: ./bin/traffic -d http://localhost:3000"
 
-      opts.on("-dDOMAIN", "--domain DOMAIN", URI, "base domain of your app") do |domain|
+      opts.on("-d", "--domain domain", URI, "base domain of your app") do |domain|
         args.domain = domain.to_s
       end
 
@@ -33,7 +33,7 @@ class Parser
   end
 end
 
-options = Parser.parse [*ARGV].presence || ['--help']
+options = Parser.parse [*ARGV]
 p options
 
 commands = [

@@ -2,7 +2,9 @@
   "name": "blog-appsignal-setup",
   "private": true,
   "scripts": {
-    "start": "bundle exec foreman start -f Procfile.dev"
+    "start": "bundle exec foreman start -f Procfile.dev",
+    "start:compose": "docker-compose up --build -V",
+    "compose:sh": "docker-compose exec -- web /bin/sh"
   },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",

@@ -1,2 +1,3 @@
-web: PORT=3000 bundle exec rails s
+web: PORT=3000 bundle exec rails s -b ${HOST:-127.0.0.1}
 sidekiq: bundle exec sidekiq
+traffic: ./bin/traffic
