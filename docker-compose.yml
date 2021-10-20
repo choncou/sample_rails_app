@@ -13,7 +13,7 @@ services:
     ports:
       - 3000:3000
       - 3035:3035
-    command: sh -c "bundle exec rails db:migrate && yarn start"
+    command: sh -c "[ -f tmp/pids/server.pid ] && rm tmp/pids/server.pid & bundle exec rails db:migrate && yarn start"
     volumes:
       - .:/usr/app_root
       - /usr/app_root/node_modules
